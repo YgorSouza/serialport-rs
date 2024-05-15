@@ -8,6 +8,9 @@ project adheres to [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+* Added conversions between `DataBits`, `StopBits` types and their numeric representations
+* Added `FromStr` implementation for `FlowControl`
+* Added `Mark` and `Space` variants to `Parity` enum
 ### Changed
 ### Fixed
 ### Removed
