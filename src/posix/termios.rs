@@ -163,6 +163,26 @@ pub(crate) fn set_parity(termios: &mut Termios, parity: Parity) {
             termios.c_iflag |= libc::INPCK;
             termios.c_iflag &= !libc::IGNPAR;
         }
+        Parity::Mark => {
+            termios.c_cflag |= libc::PARODD;
+            termios.c_cflag |= libc::PARENB;
+            termios.c_iflag |= libc::INPCK;
+            termios.c_iflag &= !libc::IGNPAR;
+            #[cfg(any(target_os = "linux", target_os = "android"))]
+            {
+                termios.c_iflag |= libc::CMSPAR;
+            }
+        }
+        Parity::Space => {
+            termios.c_cflag &= !libc::PARODD;
+            termios.c_cflag |= libc::PARENB;
+            termios.c_iflag |= libc::INPCK;
+            termios.c_iflag &= !libc::IGNPAR;
+            #[cfg(any(target_os = "linux", target_os = "android"))]
+            {
+                termios.c_iflag |= libc::CMSPAR;
+            }
+        }
     };
 }
 
