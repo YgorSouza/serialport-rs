@@ -212,11 +212,13 @@ pub enum Parity {
     /// Parity bit is set to 1.
     ///
     /// Only supported on Windows and Linux.
+    #[cfg(any(target_os = "windows", target_os = "linux", target_os = "android"))]
     Mark,
 
     /// Parity bit is set to 0.
     ///
     /// Only supported on Windows and Linux.
+    #[cfg(any(target_os = "windows", target_os = "linux", target_os = "android"))]
     Space,
 }
 
@@ -226,7 +228,9 @@ impl fmt::Display for Parity {
             Parity::None => write!(f, "None"),
             Parity::Odd => write!(f, "Odd"),
             Parity::Even => write!(f, "Even"),
+            #[cfg(any(target_os = "windows", target_os = "linux", target_os = "android"))]
             Parity::Mark => write!(f, "Mark"),
+            #[cfg(any(target_os = "windows", target_os = "linux", target_os = "android"))]
             Parity::Space => write!(f, "Space"),
         }
     }
