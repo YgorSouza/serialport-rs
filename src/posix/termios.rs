@@ -156,7 +156,7 @@ pub(crate) fn set_parity(termios: &mut Termios, parity: Parity) -> Result<()> {
             termios.c_iflag |= libc::IGNPAR;
             #[cfg(any(target_os = "linux", target_os = "android"))]
             {
-                termios.c_iflag &= !libc::CMSPAR;
+                termios.c_cflag &= !libc::CMSPAR;
             }
         }
         Parity::Odd => {
@@ -165,7 +165,7 @@ pub(crate) fn set_parity(termios: &mut Termios, parity: Parity) -> Result<()> {
             termios.c_iflag &= !libc::IGNPAR;
             #[cfg(any(target_os = "linux", target_os = "android"))]
             {
-                termios.c_iflag &= !libc::CMSPAR;
+                termios.c_cflag &= !libc::CMSPAR;
             }
         }
         Parity::Even => {
@@ -175,7 +175,7 @@ pub(crate) fn set_parity(termios: &mut Termios, parity: Parity) -> Result<()> {
             termios.c_iflag &= !libc::IGNPAR;
             #[cfg(any(target_os = "linux", target_os = "android"))]
             {
-                termios.c_iflag &= !libc::CMSPAR;
+                termios.c_cflag &= !libc::CMSPAR;
             }
         }
         #[cfg(any(target_os = "linux", target_os = "android"))]
@@ -184,7 +184,7 @@ pub(crate) fn set_parity(termios: &mut Termios, parity: Parity) -> Result<()> {
             termios.c_cflag |= libc::PARENB;
             termios.c_iflag |= libc::INPCK;
             termios.c_iflag &= !libc::IGNPAR;
-            termios.c_iflag |= libc::CMSPAR;
+            termios.c_cflag |= libc::CMSPAR;
         }
         #[cfg(any(target_os = "linux", target_os = "android"))]
         Parity::Space => {
@@ -192,7 +192,7 @@ pub(crate) fn set_parity(termios: &mut Termios, parity: Parity) -> Result<()> {
             termios.c_cflag |= libc::PARENB;
             termios.c_iflag |= libc::INPCK;
             termios.c_iflag &= !libc::IGNPAR;
-            termios.c_iflag |= libc::CMSPAR;
+            termios.c_cflag |= libc::CMSPAR;
         }
         #[cfg(not(any(target_os = "linux", target_os = "android")))]
         Parity::Mark => {
