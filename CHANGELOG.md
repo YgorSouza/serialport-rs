@@ -8,9 +8,10 @@ project adheres to [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
-* Added conversions between `DataBits`, `StopBits` types and their numeric representations
-* Added `FromStr` implementation for `FlowControl`
+
 * Added `Mark` and `Space` variants to `Parity` enum
+  [#189](https://github.com/serialport/serialport-rs/pull/189)
+
 ### Changed
 ### Fixed
 ### Removed
